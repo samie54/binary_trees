@@ -1,0 +1,3 @@
+tree = bst_remove(tree, 21);
+    printf("Removed 21...\n");
+    binary_tree_print(tree);
