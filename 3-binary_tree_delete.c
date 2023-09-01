@@ -1,12 +1,18 @@
-int main(void)
-{
-    binary_tree_t *root;
+#include "binary_trees.h"
 
-    root = binary_tree_node(NULL, 98);
-    root->left = binary_tree_node(root, 12);
-    root->right = binary_tree_node(root, 402);
-    binary_tree_insert_right(root->left, 54);
-    binary_tree_insert_right(root, 128);
-    binary_tree_print(root);
-    binary_tree_delete(root);
-    return (0);
+/**
+ * binary_tree_delete - deletes entire binary tree.
+ * @tree: tree entirely.
+ *
+ */
+void binary_tree_delete(binary_tree_t *tree)
+{
+	if (tree == NULL)
+		return;
+    
+	binary_tree_delete(tree->left);
+	binary_tree_delete(tree->right);
+    
+	free(tree);
+    tree = NULL;
+}
