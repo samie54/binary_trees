@@ -19,7 +19,6 @@ void plevel(const binary_tree_t *tree, int level, void (*func)(int))
 		plevel(tree->right, level - 1, func);
 	}
 }
-
 /**
  * rheight - heightt of binary tree.
  * @tree: tree height.
@@ -27,19 +26,18 @@ void plevel(const binary_tree_t *tree, int level, void (*func)(int))
  */
 size_t rheight(const binary_tree_t *tree)
 {
-	size_t p = 0;
-	size_t q = 0;
+	size_t a = 0;
+	size_t b = 0;
 
 	if (tree == NULL)
 		return (0);
-	p = rheight(tree->left);
-	q = rheight(tree->right);
-	if (p > q)
-		return (p + 1);
+	a = rheight(tree->left);
+	b = rheight(tree->right);
+	if (a > b)
+		return (a + 1);
 
-	return (q + 1);
+	return (b + 1);
 }
-
 /**
  * binary_tree_levelorder - prints informatiion.
  * @tree: tree info.
@@ -48,14 +46,14 @@ size_t rheight(const binary_tree_t *tree)
  */
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
-	size_t u;
-	size_t v;
+	size_t x;
+	size_t y;
 
 	if (tree == NULL || func == NULL)
 		return;
 
 	x = rheight(tree);
 
-	for (v = 1; v <= u; v++)
-		plevel(tree, v, func);
+	for (y = 1; y <= x; y++)
+		plevel(tree, y, func);
 }
