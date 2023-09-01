@@ -1,15 +1,16 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "binary_trees.h"
 
 /**
- * print_num - Prints a number
+ * binary_tree_postorder - binary tree using post-order traversal.
+ * @tree: tree traversal.
+ * @func: pointerr.
  *
- * @n: Number to be printed
  */
-void print_num(int n)
+void binary_tree_postorder(const binary_tree_t *tree, void (*func)(int))
 {
-    printf("%d\n", n);
+	if (func == NULL || tree == NULL)
+		return;
+	binary_tree_postorder(tree->left, func);
+	binary_tree_postorder(tree->right, func);
+	func(tree->n);
 }
-
-/**
