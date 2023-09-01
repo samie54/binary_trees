@@ -1,18 +1,13 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "binary_trees.h"
 
 /**
- * main - Entry point
- *
- * Return: Always 0 (Success)
+ * binary_tree_size - measures bibary tree size.
+ * @tree: tree to be measured.
+ * Return: int value.
  */
-int main(void)
+size_t binary_tree_size(const binary_tree_t *tree)
 {
-    binary_tree_t *root;
-    size_t size;
-
-    root = binary_tree_node(NULL, 98);
-    root->left = binary_tree_node(root, 12);
-    root->right = binary_tree_node(root, 402);
-    binary_tree_insert_right(root->left, 54);
+	if (tree == NULL)
+		return (0);
+	return (binary_tree_size(tree->left) + binary_tree_size(tree->right) + 1);
+}
