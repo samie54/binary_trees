@@ -1,18 +1,44 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "binary_trees.h"
 
 /**
- * main - Entry point
- *
- * Return: Always 0 (Success)
+ * rheight - height of binary tree.
+ * @tree: tree hieght.
+ * Return: int value.
  */
-int main(void)
+size_t rheight(const binary_tree_t *tree)
 {
-    binary_tree_t *root;
-    int balance;
+	size_t p = 0;
+	size_t q = 0;
 
-    root = binary_tree_node(NULL, 98);
-    root->left = binary_tree_node(root, 12);
-    root->right = binary_tree_node(root, 402);
-    binary_tree_insert_right(root->left, 54);
+	if (tree == NULL)
+		return (0);
+	p = rheight(tree->left);
+	q = rheight(tree->right);
+	if (p > q)
+		return (p + 1);
+	return (q + 1);
+}
+
+/**
+ * binary_tree_height - calling of rheight.
+ * @tree: tree called.
+ * Return: int value.
+ */
+size_t binary_tree_height(const binary_tree_t *tree)
+{
+	if (tree == NULL)
+		return (-1);
+	return (rheight(tree) - 1);
+}
+
+/**
+ * binary_tree_balance - measures balance factor of binary tree.
+ * @tree: tree hieght measured.
+ * Return: int value.
+ */
+int binary_tree_balance(const binary_tree_t *tree)
+{
+	if (tree == NULL)
+		return (0);
+	return (binary_tree_height(tree->left) - binary_tree_height(tree->right));
+}
