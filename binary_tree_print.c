@@ -3,52 +3,48 @@
 #include <string.h>
 #include "binary_trees.h"
 
-/* Original code from http://stackoverflow.com/a/13755911/5184480 */
+/* Code origin: http://stackoverflow.com/a/13755911/5184480 */
 
 /**
- * print_t - Stores recursively each level in an array of strings
+ * print_t - stores each level in array of strings recursively.
  *
- * @tree: Pointer to the node to print
- * @offset: Offset to print
- * @depth: Depth of the node
- * @s: Buffer
+ * @tree: pointerr to node to printt.
+ * @offset: offset to priint.
+ * @depth: depth of nodee.
+ * @s: size of buffer.
  *
- * Return: length of printed tree after process
+ * Return: length of tree been printed after the process.
  */
 static int print_t(const binary_tree_t *tree, int offset, int depth, char **s)
 {
-	char b[6];
-	int width, left, right, is_left, i;
+    if (!tree)
+        return (0);
 
-	if (!tree)
-		return (0);
-	is_left = (tree->parent && tree->parent->left == tree);
-	width = sprintf(b, "(%03d)", tree->n);
-	left = print_t(tree->left, offset, depth + 1, s);
-	right = print_t(tree->right, offset + left + width, depth + 1, s);
-	for (i = 0; i < width; i++)
-		s[depth][offset + left + i] = b[i];
-	if (depth && is_left)
-	{
-		for (i = 0; i < width + right; i++)
-			s[depth - 1][offset + left + width / 2 + i] = '-';
-		s[depth - 1][offset + left + width / 2] = '.';
-	}
-	else if (depth && !is_left)
-	{
-		for (i = 0; i < left + width; i++)
-			s[depth - 1][offset - width / 2 + i] = '-';
-		s[depth - 1][offset + left + width / 2] = '.';
-	}
-	return (left + width + right);
+    int width = snprintf(NULL, 0, "(%03d)", tree->n);
+    int left = print_t(tree->left, offset, depth + 1, s);
+    int right = print_t(tree->right, offset + left + width, depth + 1, s);
+
+    sprintf(s[depth] + offset + left, "(%03d)", tree->n);
+
+    for (int i = 0; i < width; i++)
+        s[depth - 1][offset + left + i] = '-';
+
+    if (tree->right)
+        s[depth - 1][offset + left + width / 2] = '+';
+
+    if (tree->left)
+        s[depth - 1][offset + left + width / 2] = '+';
+
+    return (left + width + right);
 }
 
+
 /**
- * _height - Measures the height of a binary tree
+ * _height - height of a binary tree measured.
  *
- * @tree: Pointer to the node to measures the height
+ * @tree: measures height of pointerr to node.
  *
- * Return: The height of the tree starting at @node
+ * Return: height of tree to start at node.
  */
 static size_t _height(const binary_tree_t *tree)
 {
@@ -61,9 +57,9 @@ static size_t _height(const binary_tree_t *tree)
 }
 
 /**
- * binary_tree_print - Prints a binary tree
+ * binary_tree_print - prints binary tree.
  *
- * @tree: Pointer to the root node of the tree to print
+ * @tree: pointerr to root node of tree.
  */
 void binary_tree_print(const binary_tree_t *tree)
 {
