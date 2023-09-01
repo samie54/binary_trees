@@ -1,22 +1,16 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "binary_trees.h"
 
 /**
- * print_num - Prints a number
+ * binary_tree_preorder - preoder transversal binary.
+ * @tree: tree tranversal.
+ * @func: pointerr.
  *
- * @n: Number to be printed
  */
-void print_num(int n)
+void binary_tree_preorder(const binary_tree_t *tree, void (*func)(int))
 {
-    printf("%d\n", n);
+	if (func == NULL || tree == NULL)
+		return;
+	func(tree->n);
+	binary_tree_preorder(tree->left, func);
+	binary_tree_preorder(tree->right, func);
 }
-
-/**
- * main - Entry point
- *
- * Return: Always 0 (Success)
- */
-int main(void)
-{
-    binary_tree_t *root;
