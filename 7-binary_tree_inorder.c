@@ -1,19 +1,16 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "binary_trees.h"
 
 /**
- * print_num - Prints a number
+ * binary_tree_inorder - binary tree using in-order traversal.
+ * @tree: tree traversal.
+ * @func: pointerr.
  *
- * @n: Number to be printed
  */
-void print_num(int n)
+void binary_tree_inorder(const binary_tree_t *tree, void (*func)(int))
 {
-    printf("%d\n", n);
+	if (func == NULL || tree == NULL)
+		return;
+	binary_tree_inorder(tree->left, func);
+	func(tree->n);
+	binary_tree_inorder(tree->right, func);
 }
-
-/**
- * main - Entry point
- *
- * Return: Always 0 (Success)
- */
